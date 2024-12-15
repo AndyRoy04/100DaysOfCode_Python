@@ -1,0 +1,1 @@
+bidder_name
