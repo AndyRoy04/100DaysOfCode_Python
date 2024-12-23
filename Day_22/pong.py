@@ -40,19 +40,12 @@ while game_on:
 
     # Reset when ball hits cross wall
     if ball.xcor() > 380:
-        ball.reset_left()
+        ball.reset()
         scoreboard.clear()
         scoreboard.l_score += 1
-
-
     elif ball.xcor() < -380:
-        ball.reset_right()
+        ball.reset()
         scoreboard.clear()
         scoreboard.r_score += 1
-    
-    
-    
-
-
 
 screen.exitonclick()
