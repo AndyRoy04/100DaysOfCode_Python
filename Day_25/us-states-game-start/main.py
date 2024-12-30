@@ -31,6 +31,10 @@ while game_on:
 
     if answer_state == 'Exit' or len(correct_states) == len(STATES_LIST):   # Secrete key to exit the infinite loop
         game_on = False
+        missing_states = [state for state in STATES_LIST if state not in correct_states]    # Using list comprehension to add elements to to a list
+        missing_states_data = pandas.DataFrame(missing_states)
+        # missing_states_data.to_csv('100DaysOfCode_Python/Day_25/us-states-game-start/missing_states.csv')  # Saving the missing states to a new file
+        
     if answer_state == 'Correct Me':    # Secrete key to get the correction
         for state in STATES_LIST:
             if state not in correct_states:
@@ -44,15 +48,6 @@ while game_on:
             write_to_screen(STATES_LIST[index], X_COOR_LIST[index], Y_COOR_LIST[index], color='black')
     
     title_text = f'{len(correct_states)}/{len(STATES_LIST)} States Correct'      # Updating the score text
-
-
-missing_states = []
-for state in STATES_LIST:
-    if state not in correct_states:
-        missing_states.append(state)
-
-missing_states_data = pandas.DataFrame(missing_states)
-missing_states_data.to_csv('100DaysOfCode_Python/Day_25/us-states-game-start/missing_states.csv')  # Saving the missing states to a new file
 
 # print(missing_states_data)
 turtle.mainloop()
