@@ -39,7 +39,6 @@ class QuizInterface:
         self.canvas.config(bg='white')
         still_has_questions = self.quiz.still_has_questions()
         if still_has_questions:
-            self.score_label.config(text=f'Score: {self.quiz.score}')
             q_text = self.quiz.next_question()
             self.canvas.itemconfig(self.question_text, text=q_text)
         else:
@@ -60,6 +59,7 @@ class QuizInterface:
             self.canvas.config(bg='green')
         else:
             self.canvas.config(bg='red')        
+        self.score_label.config(text=f'Score: {self.quiz.score}')
         self.canvas.itemconfig(self.question_text, fill='white')
         self.window.after(1000, self.next_question)
         
