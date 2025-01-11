@@ -1,10 +1,8 @@
 import requests
 from twilio.rest import Client
-import datetime as dt
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
-DATE = dt.date.today()  # returns todays date without the time
 
 account_sid = 'YOUR TWILIO ACCOUNT SID'     #replace
 auth_token = 'TWILIO AUTHENTICATION TOKEN'      #replace
@@ -32,9 +30,7 @@ parameters = {
     "apikey": STOCK_API_KEY
 }
 news_parameters = {
-    'q': COMPANY_NAME,
-    'from': DATE,
-    'sortBy': 'popularity',
+    'qInTitle': COMPANY_NAME,
     'apiKey': NEWS_URL_API
 }
 
@@ -64,18 +60,17 @@ else:
         news_response.raise_for_status()
         news_data = news_response.json()
         try:
-            today_article = news_data['articles'][0]
+            today_articles = news_data['articles'][:3]
         except IndexError:
             print(f'No articles found for {COMPANY_NAME} at the moment. Please try again later')
         else:
-            headline = today_article['title']
-            brief = today_article['description']
+            news_formated = [f"{price_difference}\nHeadline: {today_articles['title']}\n\nBrief: {today_articles['description']}" for item in today_articles]
 
             client = Client(account_sid, auth_token)
-
-            message = client.messages.create(
-            from_='whatsapp:TWILIO PHONE NUMBER',       #replcae
-            body=f"{price_difference}\nHeadline: {headline}\n\nBrief: {brief}",
-            to='whatsapp:+VERIFIED WHATSAPP PHONE NUMBER'     #replcae  
-            )
+            for article in news_formated:
+                message = client.messages.create(
+                from_='whatsapp:TWILIO PHONE NUMBER',       #replcae
+                body=article,
+                to='whatsapp:+VERIFIED WHATSAPP PHONE NUMBER'     #replcae  
+                )
             print(message.status)
