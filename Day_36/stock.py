@@ -6,16 +6,16 @@ STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 DATE = dt.date.today()  # returns todays date without the time
 
-account_sid = 'YOUR TWILIO ACCOUNT SID'     
-auth_token = 'TWILIO AUTHENTICATION TOKEN'      
+account_sid = 'YOUR TWILIO ACCOUNT SID'     #replace
+auth_token = 'TWILIO AUTHENTICATION TOKEN'      #replace
 
 # STOCK URL and APIG
 STOCK_URL = 'https://www.alphavantage.co/query'
-STOCK_API_KEY = 'ALPHADVANTAGE API KEY'     
+STOCK_API_KEY = 'ALPHADVANTAGE API KEY'   #replace  
 
 # STOCK NEWS URL and API
 NEWS_URL = 'https://newsapi.org/v2/everything'
-NEWS_URL_API = 'NEWS API API KEY'       
+NEWS_URL_API = 'NEWS API API KEY'       #replace
 
 # -------------------- FUNCTION TO CALCULATE PERCANTAGE DIFFERENCE ------------------------ #
 def percentage_difference(old_price, new_price):
@@ -74,8 +74,8 @@ else:
             client = Client(account_sid, auth_token)
 
             message = client.messages.create(
-            from_='whatsapp:TWILIO PHONE NUMBER',
+            from_='whatsapp:TWILIO PHONE NUMBER',       #replcae
             body=f"{price_difference}\nHeadline: {headline}\n\nBrief: {brief}",
-            to='whatsapp:+VERIFIED WHATSAPP PHONE NUMBER'
+            to='whatsapp:+VERIFIED WHATSAPP PHONE NUMBER'     #replcae  
             )
             print(message.status)
