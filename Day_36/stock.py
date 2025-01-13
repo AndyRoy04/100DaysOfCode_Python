@@ -64,7 +64,7 @@ else:
         except IndexError:
             print(f'No articles found for {COMPANY_NAME} at the moment. Please try again later')
         else:
-            news_formated = [f"{price_difference}\nHeadline: {today_articles['title']}\n\nBrief: {today_articles['description']}" for item in today_articles]
+            news_formated = [f"{price_difference}\nHeadline: {item['title']}\n\nBrief: {item['description']}" for item in today_articles]
 
             client = Client(account_sid, auth_token)
             for article in news_formated:
