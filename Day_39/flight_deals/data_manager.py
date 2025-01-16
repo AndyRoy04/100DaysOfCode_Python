@@ -1,28 +1,28 @@
+import os
 import requests
-from pprint import pprint
+from dotenv import load_dotenv
 
-
-ENDPOINT_LOG = '173c8e16ea33c53ee4be48c33afaa04c'
-SHEERTY_GET_ENPOINT = f'https://api.sheety.co/{ENDPOINT_LOG}/flightDeals/prices'
-
+load_dotenv()
 
 class DataManager:
     # This class is responsible for talking to the Google Sheet.
     def __init__(self):
-        self.sheety_url = SHEERTY_GET_ENPOINT
+        self.end_log = os.getenv('ENDPOINT_LOG')
+        self.auth_key = os.getenv('AUTHORIZATION_KEY')
+        self.header = {'Authorization': f'{self.auth_key}'}
+        self.sheety_end_point = f'https://api.sheety.co/{self.end_log}/flightDeals/prices'
 
     def get_data(self):
-        self.response = requests.get(self.sheety_url)
+        self.response = requests.get(self.sheety_end_point, headers=self.header)
         self.data = self.response.json()
         self.prices = self.data['prices']
-        # pprint(self.prices)
         return self.prices
 
-    def update_data(self, row_id):
-        SHEERTY_PUT_ENDPOINT = f"{SHEERTY_GET_ENPOINT}/{row_id}"
+    def update_data(self, row_id, iata_code):
+        SHEERTY_PUT_ENDPOINT = f"{self.sheety_end_point}/{row_id}"
         data = {
             "price": {
-                "iataCode": 'TESTING',
+                "iataCode": iata_code,
             }
         }
-        self.response = requests.put(SHEERTY_PUT_ENDPOINT, json=data)
+        self.response = requests.put(SHEERTY_PUT_ENDPOINT, json=data, headers=self.header)
