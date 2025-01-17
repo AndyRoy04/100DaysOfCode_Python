@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import datetime
 
 TOMORROW_DATE = datetime.date.today() + datetime.timedelta(days=1)      # Provides us with tomorrow's date
-FUTURE_DATE = datetime.date.today() + datetime.timedelta(days=6*30)
+FUTURE_DATE = datetime.date.today() + datetime.timedelta(days=6*30)     # Provides us with 6 months later date
 
 load_dotenv()
 
@@ -20,6 +20,9 @@ class FlightData:
         self.return_date = FUTURE_DATE
         
     def find_cheapest_flight(self, city_code, token, city_name):
+        # This method retrieves flight data from the Amadeus API.
+        self.stops = 0
+        self.stops_carriers = ""
         url = 'https://test.api.amadeus.com/v2/shopping/flight-offers'
         
         parameters = {
@@ -47,6 +50,12 @@ class FlightData:
             print(f"No flight for {city_name} found\n{city_name}: N/A")
         else:
             self.price = data['data'][0]['price']['grandTotal']
+            self.stops = len(data['data'][0]['itineraries'][0]['segments']) - 1      # Check if there are stops in the flight
+            segments = data['data'][0]['itineraries'][0]['segments']
+            
+            # Create a string of carriers involved in the flight (if stops are present)
+            for departure in segments:
+                self.stops_carriers += f" - {departure['departure']['iataCode']}"
             print(f"{city_name}: ${self.price}")
-            return self.price
+            return self.price, self.stops, self.stops_carriers
     
