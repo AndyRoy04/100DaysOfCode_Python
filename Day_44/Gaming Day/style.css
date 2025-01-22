@@ -1,0 +1,23 @@
+body {
+    background-color: black;
+    color: whitesmoke;
+  }
+  div {
+    margin: 0px auto;
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+  }
+  img {
+    border: 5px solid rgba(245, 245, 245, 0.353);
+    width: 100%;
+  }
+  h1 {
+    margin: 0px auto;
+    color: antiquewhite;
+    text-transform: uppercase;
+    font-family: "Smooch Sans", serif;
+    font-size: 40px;
+    font-weight: 800;
+    font-style: normal;
+  }
