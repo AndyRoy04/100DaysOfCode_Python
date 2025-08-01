@@ -5,7 +5,7 @@ import smtplib
 
 TEST_EMAIL = 'codingjourney25@gmail.com'
 RECEIPIENT_EMAIL = 'codingjourney25@gmail.com'
-PASSWORD = 'xneamnxivfjkunsk'
+PASSWORD = 'SMTP PASSWORD'
 
 app = Flask(__name__)
 
