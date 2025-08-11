@@ -1,0 +1,13 @@
+📝 Git & GitHub Basics - What I learned
+
+📋 CLONING
+Copied a repository from GitHub to my local machine and worked on it
+
+📋 MERGING
+Combined some changes from different branches of my repository into one
+
+📋 FORKING
+Created my own copy of someone else's repository
+
+📋 PULL REQUESTS
+I could propose my own changes to be merged into a original repository
