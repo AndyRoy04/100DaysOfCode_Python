@@ -49,10 +49,11 @@ def enter_pressed(event=None):
         
     stop_timer()    # Stopping the countdown
     text_label.config(text='')  # Clear the screen on enter key
+    wrong_words_list = []
     
     initial_time = 60
     time_elapsed = initial_time - time_left
-    print(round(time_elapsed))
+
     if time_elapsed == 0:
         text_label.config(text=f"Your Typing Speed is : {time_elapsed} WPM", font=("Consolas", 22, "bold"))  
     else:
@@ -66,19 +67,27 @@ def enter_pressed(event=None):
                 correct_words += 1
             else:
                 wrong_words += 1 
+                wrong_words_list.append(typed_word)
         
         characters_typed = len(typed_text)
         time_in_mins = time_elapsed / 60
             
         raw_WPM = (characters_typed / 5) / time_in_mins   # total typing speed without errors.   
         actual_speed = round(raw_WPM - (wrong_words / time_in_mins))   #  total typing speed with errors.
+        if correct_words == 0:
+            actual_speed = 0
        
         text_label.config(text=f"Your Typing Speed is : {actual_speed} WPM", font=("Consolas", 22, "bold"))
+        
+        if wrong_words > 0:
+            wrong_label = Label(window, text="Wrong Words: " + ", ".join(wrong_words_list), 
+                        font=("Helvetica", 14), fg="red", wraplength=900)
+            wrong_label.grid(column=1, row=3, pady=40)
     
     user_entry.destroy()
         
     restart_button = Button(text="Restart", command=restart_program)
-    restart_button.grid(column=1, row=3, pady=30)
+    restart_button.grid(column=1, row=4, pady=30)
   
 # Global Variables
 time_left = 60
@@ -90,9 +99,6 @@ timer_id = None
 # random sample from our paragraphs module
 random_sample = random.choice(SAMPLE_TEXTS)     
 sample_words = random_sample.split()
-
-print(len(random_sample))
-print(f"\n{random_sample}\n")
 
 # Printing the Time left to the screen
 timer_label = Label(window, text="Time Left: 60 s", font=("Helvetica", 10, "bold"))
