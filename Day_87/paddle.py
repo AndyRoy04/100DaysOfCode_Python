@@ -1,11 +1,22 @@
 from turtle import Turtle
 
 class Paddle(Turtle):
-    def __init__(self, position):
+    def __init__(self, location):
         super().__init__()
-        self.position = position
+        self.location = location
         self.shape("square")
         self.color("white")
         self.shapesize(stretch_wid=0.5, stretch_len=6)
         self.penup()
-        self.goto(position)
+        self.goto(location)
+        
+    def left(self):
+        if self.xcor() > -275:
+            new_x = self.xcor() - 15
+            self.goto(new_x, self.ycor())
+            self.screen.update()
+    def right(self):
+        if self.xcor() < 275:
+            new_x = self.xcor() + 15
+            self.goto(new_x, self.ycor())
+            self.screen.update()
