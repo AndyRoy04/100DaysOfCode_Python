@@ -20,10 +20,15 @@ class Ball(Turtle):
         
     def bounce_x(self):
         self.x_move *= -1
+        if self.move_speed > 0.05:
+            self.move_speed *= 0.95
         
     def bounce_y(self):
         self.y_move *= -1
-        self.move_speed *= 0.9
+        
+    def speed_up(self):
+        if self.move_speed > 0.05:
+            self.move_speed *= 0.98
 
     def force_left(self):       # Make x_move always negative  
         self.x_move = -abs(self.x_move)
