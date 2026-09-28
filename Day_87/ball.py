@@ -1,10 +1,12 @@
 from turtle import Turtle
+from colors import colors
+import random
 
 class Ball(Turtle):
     def __init__(self):
         super().__init__()
         self.shape('circle')
-        self.color('white')
+        self.color(random.choice(colors))
         self.penup()
         self.goto(-25, -310)
         self.x_move = 10

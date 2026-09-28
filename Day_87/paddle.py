@@ -1,11 +1,13 @@
 from turtle import Turtle
+from colors import colors
+import random
 
 class Paddle(Turtle):
     def __init__(self, location):
         super().__init__()
         self.location = location
         self.shape("square")
-        self.color("white")
+        self.color(random.choice(colors))
         self.shapesize(stretch_wid=0.5, stretch_len=6)
         self.penup()
         self.goto(location)

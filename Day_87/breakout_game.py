@@ -1,6 +1,7 @@
 from turtle import *
 from paddle import Paddle
 from ball import Ball
+from brick_wall import BrickWall
 import time
 
 
@@ -17,12 +18,14 @@ def game_over():    # Stopping the game
     
 game_paddle = Paddle((0, -325))
 game_ball = Ball()
+brick_wall = BrickWall()
 screen.update()
 
 screen.listen()
 screen.onkeypress(game_paddle.left, 'Left')
 screen.onkeypress(game_paddle.right, 'Right')
 screen.onkey(game_over, 'Return')
+print(len(brick_wall.brick_list))
 
 game_on = True
 while game_on:
