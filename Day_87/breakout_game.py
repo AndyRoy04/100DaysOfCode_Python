@@ -8,6 +8,7 @@ screen = Screen()
 screen.setup(700, 700)
 screen.bgcolor('black')
 screen.title('Breakout Game')
+screen.colormode(255)   # accept color numbers up to 255
 screen.tracer(0)  # nothing is drawn unto the screen untill this is been updated
 
 def game_over():    # Stopping the game
