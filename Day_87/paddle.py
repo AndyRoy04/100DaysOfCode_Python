@@ -11,12 +11,12 @@ class Paddle(Turtle):
         self.goto(location)
         
     def left(self):
-        if self.xcor() > -275:
-            new_x = self.xcor() - 15
+        if self.xcor() > -285:
+            new_x = self.xcor() - 25
             self.goto(new_x, self.ycor())
             self.screen.update()
     def right(self):
-        if self.xcor() < 275:
-            new_x = self.xcor() + 15
+        if self.xcor() < 290:
+            new_x = self.xcor() + 25
             self.goto(new_x, self.ycor())
             self.screen.update()
