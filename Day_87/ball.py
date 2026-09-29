@@ -6,12 +6,13 @@ class Ball(Turtle):
     def __init__(self):
         super().__init__()
         self.shape('circle')
+        self.shapesize(stretch_wid=0.6, stretch_len=0.6)
         self.color(random.choice(colors))
         self.penup()
-        self.goto(-25, -310)
-        self.x_move = 10
-        self.y_move = 10
-        self.move_speed = 0.1
+        self.goto(0, -295)
+        self.x_move = 7
+        self.y_move = 7
+        self.move_speed = 0.07
         
     def move(self):
         self.new_x = self.xcor() + self.x_move
@@ -20,23 +21,24 @@ class Ball(Turtle):
         
     def bounce_x(self):
         self.x_move *= -1
-        if self.move_speed > 0.05:
+        if self.move_speed > 0.03:
             self.move_speed *= 0.95
         
     def bounce_y(self):
         self.y_move *= -1
         
-    def speed_up(self):
-        if self.move_speed > 0.05:
-            self.move_speed *= 0.98
-
     def force_left(self):       # Make x_move always negative  
         self.x_move = -abs(self.x_move)
-
+            
     def force_right(self):      # Make x_move always positive
         self.x_move = abs(self.x_move)
+
+    def speed_up(self):
+        if self.move_speed > 0.025:
+            self.move_speed *= 0.97
         
     def reset(self):
-        self.goto(35, -310)
-        self.bounce_y()
-        self.move_speed = 0.1
+        self.goto(0, 0)
+        self.y_move     = 7
+        self.x_move     = random.choice([-7, 7])
+        self.move_speed = 0.04
